@@ -85,5 +85,5 @@
       trigger:'click',
       action:'toggle'
     }
-  }
+  });
 })(jQuery, Modernizr);
