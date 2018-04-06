@@ -1,8 +1,10 @@
 (function($){
   'use strict';
   
+  if(!$.hasOwnProperty('bop')) $.bop = {};
+  
   /**
-   * function bopJQPlugin
+   * function $.bop.plugin
    * 
    * version: 1.0.1
    * 
@@ -31,11 +33,11 @@
    *   defaults: object - default options
    * }
    */
-  function bopJQPlugin(){
+  $.bop.plugin = function(){
     //allow arbitrary plugins to be set together
     if(arguments.length > 1){
       for(var i=0; i<arguments.length; i++){
-        bopJQPlugin(arguments[i]);
+        $.bop.plugin(arguments[i]);
       }
       return;
     }
@@ -47,7 +49,8 @@
       var obTypeStr = 'object',
         undefTypeStr = 'undefined',
         fnTypeStr = 'function',
-        strTypeStr = 'string';
+        strTypeStr = 'string',
+        bopOptsKey = 'bopOpts';
       
       //set options
       if(typeof optsOrAction == obTypeStr){
@@ -60,10 +63,10 @@
         
         opts = $.extend({}, defaults, opts);
         this.each(function(){
-          if(typeof this.bopOpts == undefTypeStr){
-            this.bopOpts = {};
+          if(typeof this[bopOptsKey] == undefTypeStr){
+            this[bopOptsKey] = {};
           }
-          this.bopOpts[plugin.name] = opts;
+          this[bopOptsKey][plugin.name] = opts;
         });
         
         //run init
@@ -78,8 +81,8 @@
       //ooo principle
       function getOpts(el){
         var opts = {};
-        if(typeof el != undefTypeStr && typeof el.bopOpts != undefTypeStr && typeof el.bopOpts[plugin.name] != undefTypeStr){
-          opts = el.bopOpts[plugin.name];
+        if(typeof el != undefTypeStr && typeof el[bopOptsKey] != undefTypeStr && typeof el[bopOptsKey][plugin.name] != undefTypeStr){
+          opts = el[bopOptsKey][plugin.name];
         }
         return opts;
       }
@@ -107,7 +110,7 @@
     };
   }
   
-  bopJQPlugin(
+  $.bop.plugin(
     {
       name:'bindBopDataFns',
       run:function(){
@@ -125,4 +128,5 @@
   $(document).ready(function(){
     $(this).bindBopDataFns();
   });
+  
 })(jQuery);
