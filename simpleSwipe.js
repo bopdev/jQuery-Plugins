@@ -3,10 +3,10 @@
  * 
  * Occurs on the body tag (through bubbling). Original targets are
  * available through event data.
- * 
+ *
  * Events available are 'swipe', 'swipenorth', 'swipeeast',
- * 'swipesouth', 'swipewest'. Direction is the same as wind, i.e.,
- * 'swipewest' is movement from east/right to west/left. 
+ * 'swipesouth', 'swipewest'. Direction is the opposite of wind, i.e.,
+ * e.g., 'swipewest' is movement from east/right to west/left. 
  * 
  */
 $('body').on('touchstart', function(startEvent){
