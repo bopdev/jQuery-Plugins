@@ -118,7 +118,7 @@
           var $this = $(this);
           var fn = $this.data('bop-fn');
           if(typeof $this[fn] == 'function'){
-            $this[fn]($this.data(fn+'-opts'));
+            $this[fn]($this.data(fn.toLowerCase()+'-opts'));
           }
         });
       }
